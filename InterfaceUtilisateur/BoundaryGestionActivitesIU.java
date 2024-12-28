@@ -1,9 +1,8 @@
-// Package : ui
 package InterfaceUtilisateur;
 
 import Gestion.ActiviteController;
 import Modele.Activite;
-
+import Modele.ActiviteCulinaire;
 import java.util.Scanner;
 
 public class BoundaryGestionActivitesIU {
@@ -19,7 +18,7 @@ public class BoundaryGestionActivitesIU {
             System.out.println("0) Retour");
             System.out.print("Votre choix : ");
             choix = scanner.nextInt();
-            scanner.nextLine(); // Consomme la ligne restante
+            scanner.nextLine();
 
             switch (choix) {
                 case 1:
@@ -29,7 +28,7 @@ public class BoundaryGestionActivitesIU {
                     afficherActivites();
                     break;
                 case 0:
-                    System.out.println("Retour au menu précédent.");
+                    System.out.println("Retour au menu principal.");
                     break;
                 default:
                     System.out.println("Choix invalide, veuillez réessayer.");
@@ -45,7 +44,7 @@ public class BoundaryGestionActivitesIU {
         System.out.print("Description de l'activité : ");
         String description = scanner.nextLine();
 
-        Activite activite = new Activite(nomActivite, description);
+        Activite activite = new ActiviteCulinaire(nomActivite, description, "Cuisine");
         activiteController.ajouterActivite(nomEnfant, activite);
         System.out.println("Activité ajoutée avec succès pour " + nomEnfant);
     }

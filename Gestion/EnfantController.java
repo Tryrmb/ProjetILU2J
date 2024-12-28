@@ -1,9 +1,9 @@
-// Package : gestion
 package Gestion;
 
-import Modele.Enfant;
 import java.util.ArrayList;
+import Modele.Enfant;
 
+// Classe EnfantController
 public class EnfantController {
     private ArrayList<Enfant> enfants = new ArrayList<>();
 
@@ -22,16 +22,5 @@ public class EnfantController {
             }
         }
         return null;
-    }
-
-    public void afficherListeEnfants() {
-        if (enfants.isEmpty()) {
-            System.out.println("Aucun enfant inscrit.");
-        } else {
-            System.out.println("Liste des enfants inscrits :");
-            for (Enfant enfant : enfants) {
-                System.out.println("- " + enfant.getNom());
-            }
-        }
     }
 }

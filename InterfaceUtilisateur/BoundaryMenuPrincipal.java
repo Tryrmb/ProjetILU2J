@@ -1,11 +1,16 @@
+// Package : InterfaceUtilisateur
 package InterfaceUtilisateur;
 
+import Gestion.CompteController;
+import Gestion.EnfantController;
+import Gestion.ActiviteController;
+import Modele.*;
 import java.util.Scanner;
-import Gestion.UtilisateurController;
 
+// Classe BoundaryMenuPrincipal
 public class BoundaryMenuPrincipal {
     private Scanner scanner = new Scanner(System.in);
-    private UtilisateurController utilisateurController = new UtilisateurController();
+    private CompteController compteController = new CompteController();
 
     public void afficherMenuPrincipal() {
         int choix;
@@ -20,10 +25,10 @@ public class BoundaryMenuPrincipal {
 
             switch (choix) {
                 case 1:
-                    utilisateurController.gestionParent();
+                    afficherEspaceParent();
                     break;
                 case 2:
-                    utilisateurController.gestionEducateur();
+                    afficherEspaceEducateur();
                     break;
                 case 0:
                     System.out.println("Au revoir !");
@@ -32,5 +37,15 @@ public class BoundaryMenuPrincipal {
                     System.out.println("Choix invalide, veuillez réessayer.");
             }
         } while (choix != 0);
+    }
+
+    private void afficherEspaceParent() {
+        BoundaryEspaceParent espaceParent = new BoundaryEspaceParent(compteController);
+        espaceParent.afficherEspaceParent();
+    }
+
+    private void afficherEspaceEducateur() {
+        BoundaryEspaceEducateur espaceEducateur = new BoundaryEspaceEducateur();
+        espaceEducateur.afficherEspaceEducateur();
     }
 }

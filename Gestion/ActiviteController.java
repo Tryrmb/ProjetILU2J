@@ -1,22 +1,24 @@
-// Package : Gestion (Control avec Généricité)
 package Gestion;
 
-import Modele.Utilisateur;
 import Modele.Activite;
 import java.util.ArrayList;
+import java.util.List;
 
-// Classe générique pour gérer différents types d'activités
 public class ActiviteController<T extends Activite> {
-    private ArrayList<T> activites = new ArrayList<>();
+    private List<T> activites = new ArrayList<>();
 
-    public void ajouterActivite(T activite) {
+    public void ajouterActivite(String nomEnfant, T activite) {
         activites.add(activite);
     }
 
-    public void afficherActivites() {
-        System.out.println("Liste des activités :");
-        for (T activite : activites) {
-            System.out.println("- " + activite.getNom() + " : " + activite.getDescription());
+    public void afficherActivites(String nomEnfant) {
+        if (activites.isEmpty()) {
+            System.out.println("Aucune activité disponible.");
+        } else {
+            System.out.println("Liste des activités :");
+            for (T activite : activites) {
+                System.out.println("- " + activite.getNom() + ": " + activite.getDescription());
+            }
         }
     }
 
@@ -26,3 +28,4 @@ public class ActiviteController<T extends Activite> {
         }
     }
 }
+
