@@ -2,32 +2,28 @@
 package InterfaceUtilisateur;
 
 import Gestion.CompteController;
-import Gestion.EnfantController;
-import Gestion.ActiviteController;
-import Modele.*;
 import java.util.Scanner;
 
-
-// Classe BoundaryEspaceParent
+//Classe BoundaryEspaceParent
 public class BoundaryEspaceParent {
-    private Scanner scanner = new Scanner(System.in);
-    private CompteController compteController;
+ private Scanner scanner = new Scanner(System.in);
+ private CompteController compteController;
 
-    public BoundaryEspaceParent() {
-        this.compteController = compteController;
-    }
+ public BoundaryEspaceParent(CompteController compteController) {
+     this.compteController = compteController;
+ }
 
-    public void afficherEspaceParent() {
-        System.out.println("\n--- Espace Parent ---");
-        System.out.print("Email : ");
-        String email = scanner.nextLine();
-        System.out.print("Mot de passe : ");
-        String motDePasse = scanner.nextLine();
+ public void afficherEspaceParent() {
+     System.out.println("\n--- Espace Parent ---");
+     System.out.print("Email : ");
+     String email = scanner.nextLine();
+     System.out.print("Mot de passe : ");
+     String motDePasse = scanner.nextLine();
 
-        if (compteController.verifierIdentifiants(email, motDePasse)) {
-            System.out.println("Connexion réussie ! Bienvenue " + email);
-        } else {
-            System.out.println("Échec de la connexion. Vérifiez vos identifiants.");
-        }
-    }
+     if (compteController.verifierIdentifiants(email, motDePasse)) {
+         System.out.println("Connexion réussie ! Bienvenue " + email);
+     } else {
+         System.out.println("Échec de la connexion. Vérifiez vos identifiants.");
+     }
+ }
 }

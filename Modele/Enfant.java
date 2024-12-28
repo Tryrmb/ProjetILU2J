@@ -1,38 +1,49 @@
-// Package : modele
 package Modele;
 
 import java.util.ArrayList;
+import java.util.List;
 
-//Classe Enfant
+// Classe Enfant
 public class Enfant {
- private String nom;
- private String allergies;
- private String regimeAlimentaire;
- private ArrayList<String> activites = new ArrayList<>();
+    private String nom;
+    private String allergies;
+    private String regimeAlimentaire;
+    private List<String> activites = new ArrayList<>();
 
- public Enfant(String nom, String allergies, String regimeAlimentaire) {
-     this.nom = nom;
-     this.allergies = allergies;
-     this.regimeAlimentaire = regimeAlimentaire;
- }
+    public Enfant(String nom, String allergies, String regimeAlimentaire) {
+        this.nom = nom;
+        this.allergies = allergies;
+        this.regimeAlimentaire = regimeAlimentaire;
+    }
 
- public String getNom() {
-     return nom;
- }
+    // Getters
+    public String getNom() {
+        return nom;
+    }
 
- public String getAllergies() {
-     return allergies;
- }
+    public String getAllergies() {
+        return allergies;
+    }
 
- public String getRegimeAlimentaire() {
-     return regimeAlimentaire;
- }
+    public String getRegimeAlimentaire() {
+        return regimeAlimentaire;
+    }
 
- public void ajouterActivite(String activite) {
-     activites.add(activite);
- }
+    public void ajouterActivite(String activite) {
+        activites.add(activite);
+    }
 
- public ArrayList<String> getActivites() {
-     return activites;
- }
+    public List<String> getActivites() {
+        return activites;
+    }
+
+    @Override
+    public String toString() {
+        return "Enfant{" +
+                "nom='" + nom + '\'' +
+                ", allergies='" + allergies + '\'' +
+                ", regimeAlimentaire='" + regimeAlimentaire + '\'' +
+                ", activites=" + activites +
+                '}';
+    }
 }

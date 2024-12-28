@@ -6,12 +6,12 @@ import InterfaceUtilisateur.BoundaryEspaceEducateur;
 
 public class UtilisateurController {
     public void gestionParent() {
-        BoundaryEspaceParent espaceParent = new BoundaryEspaceParent();
+        BoundaryEspaceParent espaceParent = new BoundaryEspaceParent(null);
         espaceParent.afficherEspaceParent();
     }
 
     public void gestionEducateur() {
-        BoundaryEspaceEducateur espaceEducateur = new BoundaryEspaceEducateur();
+        BoundaryEspaceEducateur espaceEducateur = new BoundaryEspaceEducateur(null);
         espaceEducateur.afficherEspaceEducateur();
     }
 }

@@ -1,16 +1,15 @@
 // Package : InterfaceUtilisateur
 package InterfaceUtilisateur;
 
-import Gestion.CompteController;
 import Gestion.EnfantController;
-import Gestion.ActiviteController;
-import Modele.*;
+import Gestion.CompteController;
 import java.util.Scanner;
 
 // Classe BoundaryMenuPrincipal
 public class BoundaryMenuPrincipal {
     private Scanner scanner = new Scanner(System.in);
     private CompteController compteController = new CompteController();
+    private EnfantController enfantController = new EnfantController();
 
     public void afficherMenuPrincipal() {
         int choix;
@@ -45,7 +44,7 @@ public class BoundaryMenuPrincipal {
     }
 
     private void afficherEspaceEducateur() {
-        BoundaryEspaceEducateur espaceEducateur = new BoundaryEspaceEducateur();
+        BoundaryEspaceEducateur espaceEducateur = new BoundaryEspaceEducateur(enfantController);
         espaceEducateur.afficherEspaceEducateur();
     }
 }

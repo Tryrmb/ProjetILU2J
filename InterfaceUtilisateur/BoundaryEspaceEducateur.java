@@ -3,12 +3,15 @@ package InterfaceUtilisateur;
 import java.util.Scanner;
 import Gestion.EnfantController;
 import Modele.Enfant;
-import Modele.Activite;
 
 //Classe BoundaryEspaceEducateur
 public class BoundaryEspaceEducateur {
  private Scanner scanner = new Scanner(System.in);
- private EnfantController enfantController = new EnfantController();
+ private EnfantController enfantController;
+
+ public BoundaryEspaceEducateur(EnfantController enfantController) {
+     this.enfantController = enfantController;
+ }
 
  public void afficherEspaceEducateur() {
      System.out.println("\n--- Espace Éducateur ---");
@@ -45,6 +48,7 @@ public class BoundaryEspaceEducateur {
  }
 
  private void gererActivites() {
-     System.out.println("Gestion des activités en cours de développement.");
+     BoundaryGestionActivitesIU gestionActivites = new BoundaryGestionActivitesIU();
+     gestionActivites.gererActivites();
  }
 }
