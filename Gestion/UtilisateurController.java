@@ -1,17 +1,27 @@
-// Package : gestion
+// Package : Gestion
 package Gestion;
 
 import InterfaceUtilisateur.BoundaryEspaceParent;
 import InterfaceUtilisateur.BoundaryEspaceEducateur;
 
 public class UtilisateurController {
-    public void gestionParent() {
-        BoundaryEspaceParent espaceParent = new BoundaryEspaceParent(null);
-        espaceParent.afficherEspaceParent();
+    private CompteController compteController;
+    private EnfantController enfantController;
+    
+
+    public UtilisateurController(CompteController compteController, EnfantController enfantController) {
+        this.compteController = compteController;
+        this.enfantController = enfantController;
     }
 
-    public void gestionEducateur() {
-        BoundaryEspaceEducateur espaceEducateur = new BoundaryEspaceEducateur(null);
-        espaceEducateur.afficherEspaceEducateur();
+    public void gestionParent(String email) {
+        BoundaryEspaceParent espaceParent = new BoundaryEspaceParent(email, compteController, enfantController);
+        espaceParent.afficherMenuParent(); // Appelle le menu parent
     }
+
+    public void gestionEducateur(String email) {
+        BoundaryEspaceEducateur espaceEducateur = new BoundaryEspaceEducateur(email, compteController);
+        espaceEducateur.afficherMenuEducateur();
+    }
+
 }

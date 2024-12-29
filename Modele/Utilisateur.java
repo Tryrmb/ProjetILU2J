@@ -1,6 +1,9 @@
 package Modele;
+//Package : Modele
 
-//Classe abstraite Utilisateur
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Utilisateur {
  private String email;
  private String motDePasse;

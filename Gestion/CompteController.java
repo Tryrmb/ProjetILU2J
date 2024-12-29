@@ -1,21 +1,31 @@
 // Package : Gestion
 package Gestion;
 
-import Modele.Compte;
-import java.util.ArrayList;
+import Modele.Educateur;
+import Modele.Parent;
+
 import java.util.List;
 
-
-//Classe CompteController
 public class CompteController {
- private List<Compte> comptes = new ArrayList<>();
+    private DataStorage dataStorage;
 
- public void ajouterCompte(String email, String motDePasse) {
-     comptes.add(new Compte(email, motDePasse));
- }
+    // Constructeur
+    public CompteController(DataStorage dataStorage) {
+        this.dataStorage = dataStorage;
+    }
 
- public boolean verifierIdentifiants(String email, String motDePasse) {
-     return comptes.stream()
-             .anyMatch(compte -> compte.getEmail().equals(email) && compte.getMotDePasse().equals(motDePasse));
- }
-}
+    // Vérifier les identifiants
+    public boolean verifierIdentifiants(String email, String motDePasse) {
+        return dataStorage.getParents().stream()
+                .anyMatch(parent -> parent.getEmail().equals(email) && parent.getMotDePasse().equals(motDePasse));
+    }
+
+    // Trouver un parent par email
+    public Educateur trouverEducateurParEmail(String email) {
+        return dataStorage.getEducateurs().stream()
+                .filter(educateur -> educateur.getEmail().equals(email))
+                .findFirst()
+                .orElse(null);
+    }
+    }
+

@@ -1,13 +1,31 @@
-// Projet EnfantPro+ : Refactorisation pour compilation correcte
-
 // Package : main
 package main;
 
+import Gestion.CompteController;
+import Gestion.DataStorage;
+import Gestion.EnfantController;
 import InterfaceUtilisateur.BoundaryMenuPrincipal;
+
+import java.io.IOException;
 
 public class EnfantPro {
     public static void main(String[] args) {
-        BoundaryMenuPrincipal menu = new BoundaryMenuPrincipal();
+        // Initialisation des contrôleurs et du stockage
+        DataStorage dataStorage = new DataStorage();
+        CompteController compteController = new CompteController(dataStorage);
+        EnfantController enfantController = new EnfantController();
+
+        // Chargement des données depuis les fichiers CSV
+        try {
+            dataStorage.chargerDonneesParentsDepuisCSV("src/ressources/parents_enfants.csv");
+            dataStorage.chargerDonneesEducateursDepuisCSV("src/ressources/educateurs_donnees.csv");
+        } catch (IOException e) {
+            System.err.println("Erreur lors du chargement des données : " + e.getMessage());
+            return;
+        }
+
+        // Initialisation du menu principal
+        BoundaryMenuPrincipal menu = new BoundaryMenuPrincipal(compteController, enfantController);
         menu.afficherMenuPrincipal();
     }
 }

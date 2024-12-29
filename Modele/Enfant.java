@@ -3,7 +3,6 @@ package Modele;
 import java.util.ArrayList;
 import java.util.List;
 
-// Classe Enfant
 public class Enfant {
     private String nom;
     private String allergies;
@@ -16,7 +15,6 @@ public class Enfant {
         this.regimeAlimentaire = regimeAlimentaire;
     }
 
-    // Getters
     public String getNom() {
         return nom;
     }
@@ -35,15 +33,5 @@ public class Enfant {
 
     public List<String> getActivites() {
         return activites;
-    }
-
-    @Override
-    public String toString() {
-        return "Enfant{" +
-                "nom='" + nom + '\'' +
-                ", allergies='" + allergies + '\'' +
-                ", regimeAlimentaire='" + regimeAlimentaire + '\'' +
-                ", activites=" + activites +
-                '}';
     }
 }

@@ -1,7 +1,9 @@
+// Package : Gestion
 package Gestion;
 
 import Modele.Parent;
 import Modele.Enfant;
+import Modele.Educateur;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -11,32 +13,71 @@ import java.util.List;
 
 public class DataStorage {
     private List<Parent> parents = new ArrayList<>();
+    private List<Educateur> educateurs = new ArrayList<>();
 
-    // Méthode pour charger les données depuis un fichier CSV
-    public void chargerDonneesDepuisCSV(String cheminFichier) throws IOException {
+    // Charger les données des parents depuis un fichier CSV
+    public void chargerDonneesParentsDepuisCSV(String cheminFichier) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(cheminFichier));
         String ligne;
+        boolean isFirstLine = true;
 
         while ((ligne = reader.readLine()) != null) {
-            String[] donnees = ligne.split(",");
-            String nomParent = donnees[0];
-            String emailParent = donnees[1];
-            String motDePasse = donnees[2];
-            String nomEnfant = donnees[3];
-            String allergies = donnees[4];
-            String regime = donnees[5];
-
-            Parent parent = trouverParentParEmail(emailParent);
-            if (parent == null) {
-                parent = new Parent(nomParent, emailParent, motDePasse);
-                parents.add(parent);
+            if (isFirstLine) {
+                isFirstLine = false;
+                continue;
             }
-            parent.ajouterEnfant(new Enfant(nomEnfant, allergies, regime));
+            try {
+                String[] donnees = ligne.split(",");
+                String nomParent = donnees[1].trim();
+                String emailParent = donnees[2].trim();
+                String motDePasse = donnees[12].trim();
+                String nomEnfant = donnees[3].trim();
+                String allergies = String.join(", ", donnees[4].trim(), donnees[5].trim(), donnees[6].trim(), donnees[7].trim());
+                String regimeAlimentaire = donnees[8].trim();
+                String problemeDeSante = donnees[9].trim();
+
+                Parent parent = trouverParentParEmail(emailParent);
+                if (parent == null) {
+                    parent = new Parent(nomParent, emailParent, motDePasse);
+                    parents.add(parent);
+                }
+
+                Enfant enfant = new Enfant(nomEnfant, allergies, regimeAlimentaire);
+                enfant.ajouterActivite("Problème de santé : " + problemeDeSante);
+                parent.ajouterEnfant(enfant);
+            } catch (Exception e) {
+                System.err.println("Erreur lors du traitement de la ligne : " + ligne);
+            }
         }
         reader.close();
     }
 
-    // Méthode pour trouver un parent par email
+    // Charger les données des éducateurs depuis un fichier CSV
+    public void chargerDonneesEducateursDepuisCSV(String cheminFichier) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(cheminFichier));
+        String ligne;
+        boolean isFirstLine = true;
+
+        while ((ligne = reader.readLine()) != null) {
+            if (isFirstLine) {
+                isFirstLine = false;
+                continue;
+            }
+            try {
+                String[] donnees = ligne.split(",");
+                String nomEducateur = donnees[0].trim();
+                String emailEducateur = donnees[1].trim();
+                String motDePasse = donnees[2].trim();
+
+                Educateur educateur = new Educateur(nomEducateur, emailEducateur, motDePasse);
+                educateurs.add(educateur);
+            } catch (Exception e) {
+                System.err.println("Erreur lors du traitement de la ligne : " + ligne);
+            }
+        }
+        reader.close();
+    }
+
     public Parent trouverParentParEmail(String email) {
         for (Parent parent : parents) {
             if (parent.getEmail().equals(email)) {
@@ -46,8 +87,20 @@ public class DataStorage {
         return null;
     }
 
-    // Méthode pour récupérer la liste des parents
+    public Educateur trouverEducateurParEmail(String email) {
+        for (Educateur educateur : educateurs) {
+            if (educateur.getEmail().equals(email)) {
+                return educateur;
+            }
+        }
+        return null;
+    }
+
     public List<Parent> getParents() {
         return parents;
+    }
+
+    public List<Educateur> getEducateurs() {
+        return educateurs;
     }
 }

@@ -1,13 +1,12 @@
 package Modele;
 
-//Classe Compte
 public class Compte extends Utilisateur {
- public Compte(String email, String motDePasse) {
-     super(email, motDePasse);
- }
+    public Compte(String email, String motDePasse) {
+        super(email, motDePasse);
+    }
 
- @Override
- public String getRole() {
-     return "Parent";
- }
+    @Override
+    public String getRole() {
+        return "Parent";
+    }
 }

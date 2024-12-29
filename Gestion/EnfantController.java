@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Modele.Enfant;
+import Modele.Parent;
 
 // Classe EnfantController
 //Classe EnfantController
@@ -17,4 +18,11 @@ public class EnfantController {
  public List<Enfant> getEnfants() {
      return enfants;
  }
+
+public Parent trouverParentParEmail(String email) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
 }

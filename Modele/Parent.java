@@ -3,7 +3,6 @@ package Modele;
 import java.util.ArrayList;
 import java.util.List;
 
-// Classe Parent
 public class Parent {
     private String nom;
     private String email;
@@ -17,7 +16,6 @@ public class Parent {
         this.enfants = new ArrayList<>();
     }
 
-    // Getters
     public String getNom() {
         return nom;
     }
@@ -35,21 +33,6 @@ public class Parent {
     }
 
     public void ajouterEnfant(Enfant enfant) {
-        if (!enfants.contains(enfant)) {
-            enfants.add(enfant);
-        }
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Parent{nom='").append(nom)
-                .append("', email='").append(email)
-                .append("', enfants=[");
-        for (Enfant enfant : enfants) {
-            sb.append("\n  ").append(enfant.toString());
-        }
-        sb.append("\n]}");
-        return sb.toString();
+        enfants.add(enfant);
     }
 }
