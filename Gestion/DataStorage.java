@@ -70,16 +70,12 @@ public class DataStorage {
 
                 Educateur educateur = new Educateur(nomEducateur, emailEducateur, motDePasse);
                 educateurs.add(educateur);
-
-                System.out.println("Éducateur ajouté : " + nomEducateur + ", Email : " + emailEducateur);
             } catch (Exception e) {
                 System.err.println("Erreur lors du traitement de la ligne : " + ligne);
             }
         }
         reader.close();
     }
-
-
 
     public Parent trouverParentParEmail(String email) {
         for (Parent parent : parents) {
@@ -92,16 +88,12 @@ public class DataStorage {
 
     public Educateur trouverEducateurParEmail(String email) {
         for (Educateur educateur : educateurs) {
-            System.out.println("Comparaison avec : " + educateur.getEmail());
             if (educateur.getEmail().equals(email)) {
                 return educateur;
             }
         }
-        System.out.println("Aucun éducateur trouvé avec l'email : " + email);
         return null;
     }
-
-
 
     public List<Parent> getParents() {
         return parents;
@@ -124,5 +116,4 @@ public class DataStorage {
             System.out.println("- Nom : " + educateur.getNom() + ", Email : " + educateur.getEmail() + ", Mot de passe : " + educateur.getMotDePasse());
         }
     }
-
 }
