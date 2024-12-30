@@ -3,11 +3,15 @@ package Modele;
 import java.util.ArrayList;
 import java.util.List;
 
+import Gestion.AllergieEtRestriction;
+
 public class Enfant {
     private String nom;
     private String allergies;
     private String regimeAlimentaire;
     private List<String> activites = new ArrayList<>();
+    private AllergieEtRestriction<String> allergiesEtRestrictions = new AllergieEtRestriction<>();
+
 
     public Enfant(String nom, String allergies, String regimeAlimentaire) {
         this.nom = nom;
@@ -34,4 +38,6 @@ public class Enfant {
     public List<String> getActivites() {
         return activites;
     }
+    
+    
 }

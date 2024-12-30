@@ -19,6 +19,9 @@ public class EnfantPro {
         try {
             dataStorage.chargerDonneesParentsDepuisCSV("src/ressources/parents_enfants.csv");
             dataStorage.chargerDonneesEducateursDepuisCSV("src/ressources/educateurs_donnees.csv");
+            
+            // Afficher les éducateurs chargés
+            dataStorage.afficherEducateurs();
         } catch (IOException e) {
             System.err.println("Erreur lors du chargement des données : " + e.getMessage());
             return;

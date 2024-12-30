@@ -1,31 +1,51 @@
 // Package : Gestion
 package Gestion;
 
-import Modele.Educateur;
 import Modele.Parent;
-
-import java.util.List;
+import Modele.Educateur;
 
 public class CompteController {
     private DataStorage dataStorage;
 
-    // Constructeur
     public CompteController(DataStorage dataStorage) {
         this.dataStorage = dataStorage;
     }
 
-    // Vérifier les identifiants
     public boolean verifierIdentifiants(String email, String motDePasse) {
-        return dataStorage.getParents().stream()
-                .anyMatch(parent -> parent.getEmail().equals(email) && parent.getMotDePasse().equals(motDePasse));
+        Parent parent = dataStorage.trouverParentParEmail(email);
+        return parent != null && parent.getMotDePasse().equals(motDePasse);
     }
 
-    // Trouver un parent par email
+    public boolean verifierIdentifiantsEducateur(String email, String motDePasse) {
+        System.out.println("Tentative d'authentification :");
+        System.out.println("Email fourni : " + email);
+        System.out.println("Mot de passe fourni : " + motDePasse);
+
+        Educateur educateur = dataStorage.trouverEducateurParEmail(email);
+
+        if (educateur == null) {
+            System.out.println("Échec : Aucun éducateur trouvé avec l'email " + email);
+            return false;
+        }
+
+        System.out.println("Éducateur trouvé : " + educateur.getEmail());
+        System.out.println("Mot de passe attendu : " + educateur.getMotDePasse());
+
+        if (educateur.getMotDePasse().equals(motDePasse)) {
+            System.out.println("Authentification réussie !");
+            return true;
+        } else {
+            System.out.println("Échec : Mot de passe incorrect.");
+            return false;
+        }
+    }
+
+    
+    public Parent trouverParentParEmail(String email) {
+        return dataStorage.trouverParentParEmail(email);
+    }
+
     public Educateur trouverEducateurParEmail(String email) {
-        return dataStorage.getEducateurs().stream()
-                .filter(educateur -> educateur.getEmail().equals(email))
-                .findFirst()
-                .orElse(null);
+        return dataStorage.trouverEducateurParEmail(email);
     }
-    }
-
+}

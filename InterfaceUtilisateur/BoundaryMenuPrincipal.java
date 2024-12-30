@@ -65,12 +65,14 @@ public class BoundaryMenuPrincipal {
         System.out.print("Mot de passe : ");
         String motDePasse = scanner.nextLine();
 
-        if (compteController.verifierIdentifiants(email, motDePasse)) {
-            System.out.println("Authentification réussie. Bienvenue dans l'espace Éducateur !");
-            // Ajoutez ici les interactions spécifiques pour les éducateurs
+        if (compteController.verifierIdentifiantsEducateur(email, motDePasse)) {
+            System.out.println("Authentification réussie. Bienvenue dans l'espace Educateur !");
+            BoundaryEspaceEducateur espaceEducateur = new BoundaryEspaceEducateur(email, compteController);
+            espaceEducateur.afficherMenuEducateur();
         } else {
             System.out.println("Erreur d'authentification. Veuillez réessayer.");
         }
     }
+
 }
 
