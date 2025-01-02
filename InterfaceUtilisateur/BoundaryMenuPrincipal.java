@@ -10,6 +10,7 @@ public class BoundaryMenuPrincipal {
     private CompteController compteController;
     private EnfantController enfantController;
 
+    // Constructeur mis à jour
     public BoundaryMenuPrincipal(CompteController compteController, EnfantController enfantController) {
         this.compteController = compteController;
         this.enfantController = enfantController;
@@ -52,7 +53,7 @@ public class BoundaryMenuPrincipal {
         if (compteController.verifierIdentifiants(email, motDePasse)) {
             System.out.println("Authentification réussie. Bienvenue dans l'espace Parent !");
             BoundaryEspaceParent espaceParent = new BoundaryEspaceParent(email, compteController, enfantController);
-            espaceParent.afficherMenuParent(); // Appel du menu parent
+            espaceParent.afficherMenuParent();
         } else {
             System.out.println("Erreur d'authentification. Veuillez réessayer.");
         }
@@ -67,12 +68,10 @@ public class BoundaryMenuPrincipal {
 
         if (compteController.verifierIdentifiantsEducateur(email, motDePasse)) {
             System.out.println("Authentification réussie. Bienvenue dans l'espace Educateur !");
-            BoundaryEspaceEducateur espaceEducateur = new BoundaryEspaceEducateur(email, compteController);
+            BoundaryEspaceEducateur espaceEducateur = new BoundaryEspaceEducateur(email, compteController, enfantController, null);
             espaceEducateur.afficherMenuEducateur();
         } else {
             System.out.println("Erreur d'authentification. Veuillez réessayer.");
         }
     }
-
 }
-

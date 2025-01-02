@@ -57,24 +57,35 @@ public class BoundaryEspaceParent {
 
     private void afficherActivitesEnfants() {
         System.out.println("\n--- Activités des enfants ---");
-        parent.getEnfants().forEach(enfant -> {
-            System.out.println("Enfant : " + enfant.getNom());
-            enfant.getActivites().forEach(activite -> System.out.println(" - Activité : " + activite));
-        });
+        for (var enfant : parent.getEnfants()) {
+            if (enfant != null) {
+                System.out.println("Enfant : " + enfant.getNom());
+                for (var activite : enfant.getActivites()) {
+                    if (activite != null) {
+                        System.out.println(" - Activité : " + activite);
+                    }
+                }
+            }
+        }
     }
 
     private void afficherSanteEnfants() {
         System.out.println("\n--- Informations santé des enfants ---");
-        parent.getEnfants().forEach(enfant -> {
-            System.out.println("Enfant : " + enfant.getNom());
-            System.out.println(" - Allergies : " + enfant.getAllergies());
-            System.out.println(" - Régime alimentaire : " + enfant.getRegimeAlimentaire());
-        });
+        for (var enfant : parent.getEnfants()) {
+            if (enfant != null) {
+                System.out.println("Enfant : " + enfant.getNom());
+                System.out.println(" - Allergies : " + enfant.getAllergies());
+                System.out.println(" - Régime alimentaire : " + enfant.getRegimeAlimentaire());
+            }
+        }
     }
 
     private void afficherBilans() {
         System.out.println("\n--- Bilans des enfants ---");
-        // Placeholder pour les bilans (ajoutez une logique selon vos besoins)
-        System.out.println("Bilan non disponible pour le moment.");
+        for (var enfant : parent.getEnfants()) {
+            if (enfant != null) {
+                System.out.println("Bilan pour " + enfant.getNom() + ": Fonctionnalité en cours de développement.");
+            }
+        }
     }
 }

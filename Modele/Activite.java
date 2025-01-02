@@ -1,8 +1,4 @@
-// Package : Modele
 package Modele;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import Enumeration.TypeActivite;
 
@@ -14,18 +10,23 @@ import Enumeration.TypeActivite;
 public abstract class Activite {
     private String nom;
     private String description;
-    private TypeActivite typeActivite; // Enum pour le type d'activité
+    private TypeActivite typeActivite;
 
     // Attributs pour gérer les participants et leurs informations
-    private List<String> participants = new ArrayList<>();
-    private List<String> restrictionsAlimentaires = new ArrayList<>();
-    private List<String> contactsParents = new ArrayList<>();
+    private String[] participants;
+    private String[] restrictionsAlimentaires;
+    private String[] contactsParents;
+    private int participantCount = 0;
+    private static final int MAX_PARTICIPANTS = 50; // Taille maximale
 
     // Constructeur
     public Activite(String nom, String description, TypeActivite typeActivite) {
         this.nom = nom;
         this.description = description;
         this.typeActivite = typeActivite;
+        this.participants = new String[MAX_PARTICIPANTS];
+        this.restrictionsAlimentaires = new String[MAX_PARTICIPANTS];
+        this.contactsParents = new String[MAX_PARTICIPANTS];
     }
 
     // Getters
@@ -42,15 +43,7 @@ public abstract class Activite {
     }
 
     // Méthodes abstraites
-    /**
-     * Vérifie la compatibilité des participants avec les restrictions alimentaires.
-     */
     public abstract void verifierCompatibiliteParticipants();
-
-    /**
-     * Gère les incompatibilités pour une activité spécifique (par exemple, exclusion ou
-     * modification).
-     */
     public abstract void gererIncompatibilites();
 
     // Méthodes concrètes
@@ -58,14 +51,19 @@ public abstract class Activite {
     /**
      * Ajoute un participant avec sa restriction alimentaire et son contact parent.
      *
-     * @param enfant         Nom de l'enfant participant
-     * @param restriction    Restriction alimentaire de l'enfant
-     * @param contactParent  Coordonnées du parent (email ou téléphone)
+     * @param enfant        Nom de l'enfant participant
+     * @param restriction   Restriction alimentaire de l'enfant
+     * @param contactParent Coordonnées du parent (email ou téléphone)
+     * @throws IllegalStateException Si la capacité maximale est atteinte
      */
     public void ajouterParticipant(String enfant, String restriction, String contactParent) {
-        participants.add(enfant);
-        restrictionsAlimentaires.add(restriction);
-        contactsParents.add(contactParent);
+        if (participantCount >= MAX_PARTICIPANTS) {
+            throw new IllegalStateException("Nombre maximum de participants atteint.");
+        }
+        participants[participantCount] = enfant;
+        restrictionsAlimentaires[participantCount] = restriction;
+        contactsParents[participantCount] = contactParent;
+        participantCount++;
     }
 
     /**
@@ -73,10 +71,10 @@ public abstract class Activite {
      */
     public void afficherParticipants() {
         System.out.println("Participants de l'activité : " + nom);
-        for (int i = 0; i < participants.size(); i++) {
-            System.out.println(" - Enfant : " + participants.get(i));
-            System.out.println("   Restriction : " + restrictionsAlimentaires.get(i));
-            System.out.println("   Contact parent : " + contactsParents.get(i));
+        for (int i = 0; i < participantCount; i++) {
+            System.out.println(" - Enfant : " + participants[i]);
+            System.out.println("   Restriction : " + restrictionsAlimentaires[i]);
+            System.out.println("   Contact parent : " + contactsParents[i]);
         }
     }
 
@@ -87,10 +85,8 @@ public abstract class Activite {
      */
     public void notifierParents(String message) {
         System.out.println("Envoi de notifications aux parents...");
-        for (String contact : contactsParents) {
-            System.out.println("Notification envoyée à " + contact + " : " + message);
+        for (int i = 0; i < participantCount; i++) {
+            System.out.println("Notification envoyée à " + contactsParents[i] + " : " + message);
         }
     }
 }
-
-

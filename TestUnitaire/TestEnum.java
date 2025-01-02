@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 class TestEnum {
     public static void main(String[] args) {
-        TypeActivite activite = TypeActivite.ALLERGIE;
+        TypeActivite activite = TypeActivite.CULINAIRE;
         System.out.println("Type d'activité : " + activite);
     }
 }

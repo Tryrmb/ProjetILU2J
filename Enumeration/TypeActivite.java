@@ -1,8 +1,8 @@
 package Enumeration;
 
 public enum TypeActivite {
-    ALLERGIE,
-    RELIGION,
-    REGIME,
-    TRADITIONNEL; // Pour des notifications générales
+    CULINAIRE,
+    RECREATIVE,
+    SORTIEFORET,
+    SORTIEAQUATIQUE;// Pour des notifications générales
 }

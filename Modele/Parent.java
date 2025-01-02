@@ -1,19 +1,19 @@
 package Modele;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Parent {
     private String nom;
     private String email;
     private String motDePasse;
-    private List<Enfant> enfants;
+    private Enfant[] enfants;
+    private int enfantCount;
+    private static final int MAX_ENFANTS = 10; // Taille maximale des enfants
 
     public Parent(String nom, String email, String motDePasse) {
         this.nom = nom;
         this.email = email;
         this.motDePasse = motDePasse;
-        this.enfants = new ArrayList<>();
+        this.enfants = new Enfant[MAX_ENFANTS];
+        this.enfantCount = 0;
     }
 
     public String getNom() {
@@ -28,11 +28,17 @@ public class Parent {
         return motDePasse;
     }
 
-    public List<Enfant> getEnfants() {
-        return enfants;
+    public Enfant[] getEnfants() {
+        Enfant[] result = new Enfant[enfantCount];
+        System.arraycopy(enfants, 0, result, 0, enfantCount);
+        return result;
     }
 
     public void ajouterEnfant(Enfant enfant) {
-        enfants.add(enfant);
+        if (enfantCount < MAX_ENFANTS) {
+            enfants[enfantCount++] = enfant;
+        } else {
+            System.err.println("Impossible d'ajouter un enfant : limite atteinte.");
+        }
     }
 }

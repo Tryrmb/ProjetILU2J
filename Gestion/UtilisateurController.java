@@ -7,11 +7,12 @@ import InterfaceUtilisateur.BoundaryEspaceEducateur;
 public class UtilisateurController {
     private CompteController compteController;
     private EnfantController enfantController;
-    
+    private GestionnaireIncompatibilité gestionnaireIncompatibilites;
 
-    public UtilisateurController(CompteController compteController, EnfantController enfantController) {
+    public UtilisateurController(CompteController compteController, EnfantController enfantController, GestionnaireIncompatibilité gestionnaireIncompatibilites) {
         this.compteController = compteController;
         this.enfantController = enfantController;
+        this.gestionnaireIncompatibilites = gestionnaireIncompatibilites;
     }
 
     public void gestionParent(String email) {
@@ -20,8 +21,8 @@ public class UtilisateurController {
     }
 
     public void gestionEducateur(String email) {
-        BoundaryEspaceEducateur espaceEducateur = new BoundaryEspaceEducateur(email, compteController);
+        BoundaryEspaceEducateur espaceEducateur = new BoundaryEspaceEducateur(email, compteController, enfantController, gestionnaireIncompatibilites);
         espaceEducateur.afficherMenuEducateur();
     }
-
 }
+
